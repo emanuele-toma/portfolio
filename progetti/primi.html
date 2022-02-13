@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<style>
+	.stronz {
+		display: inline-block;
+		word-break: break-word;
+		width: 25%;
+	}
+</style>
+</HEAD>
+<BODY>
+<div class="bg-light p-3">
+	<!-- Interfaccia -->
+	<h2>Calcolatore Numeri Primi</h2>
+	<form class="pt-2">
+		<div class="form-group w-25">
+			<label class="form-check-label" for="valori">Numeri primi da calcolare: </label>
+			<input class="form-control" id="valori" type="number" value=100>
+			<label class="form-check-label mt-3" for="slider">Fluidità - Velocità</label>
+			<input class="form-control" id="slider" type="range" min="0" max="50" value="15">
+			
+			<input class="form-check-input ml-0" id="scroll" type="checkbox" checked>
+			<label class="form-check-label ml-3" for="scroll">Auto Scroll</label>
+		</div>
+		
+	</form>
+	<button type="button" id="myBtn" class="btn btn-primary" onClick="calcola()">Avvia</button><br><br>
+	<code id="primi" class="pt-5 text-justify w-25 stronz">
+
+	</code>
+</div>
+	<!-- Javascript -->
+<script>
+	var pPrimi = document.getElementById('primi');
+	var primi = [1, 2];
+	var y = 0
+	var col = 3
+
+	async function calcola() {
+
+		var valori = document.getElementById('valori').value;
+		var scroll = document.getElementById('scroll').checked;
+		var slider = document.getElementById('slider').value;
+		pPrimi.innerHTML = "1 2 "
+		for(i=1; i <= valori; i=i+2) {
+			
+			for(x=0; x < primi.length; x++) {
+				
+				if(i % primi[x] == 0){
+					y++;
+				}
+				
+			}
+	
+			if(y==1) {
+				y = 0
+				
+				if(i != 1){
+					primi.push(i);
+					pPrimi.innerHTML += i + " ";
+
+					if(scroll == true) window.scrollTo(0,document.body.scrollHeight);
+
+					let random = Math.floor(Math.random() * slider);
+					if(random == 0){
+						await sleep(1);
+					}
+					
+				}
+			}
+			y = 0
+		}
+		
+		i = 0
+		x = 0
+		y = 0
+		col = 3
+
+		primi = [1, 2]
+		await sleep(10);	
+		
+		pPrimi.innerHTML +="<br><br> Completato";
+	}
+
+	function sleep(ms) {
+  		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+</script>
+</BODY>
+</HTML>
