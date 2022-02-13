@@ -1,9 +1,16 @@
 [
 	{
-		"title":"MineSweeper | discord.js, node.js",
+		"title":"MineSweeper | discord.js, node.js, js",
 		"views": "2159",
 		"date": "18/08/2020 18:00",
 		"thumbnail": "https://64.media.tumblr.com/668b8e5052df2850a7e3cbf53f90f12b/tumblr_n34f4rNcu81tv5dpdo1_1280.png",
+		"icon": "./media/icona.png"
+	},
+	{
+		"title":"Calcolatore numeri primi | js, Bootstrap",
+		"views": "274",
+		"date": "01/04/2020 18:00",
+		"thumbnail": "./media/numeri_primi.png",
 		"icon": "./media/icona.png"
 	}
 ]
