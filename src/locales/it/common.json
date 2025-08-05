@@ -1,0 +1,197 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Chi sono",
+    "skills": "Competenze",
+    "projects": "Progetti",
+    "experience": "Esperienza",
+    "contact": "Contatti"
+  },
+  "hero": {
+    "greeting": "Ciao, mi chiamo",
+    "name": "Emanuele Toma",
+    "role": "Sviluppatore Web e DevOps Engineer",
+    "subtitle": "Progetto soluzioni web efficienti e infrastrutture affidabili, unendo sviluppo e automazione.",
+    "cta": "Scopri di più",
+    "links": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "resume": "Curriculum"
+    }
+  },
+  "skills": {
+    "title": "Competenze",
+    "subtitle": "Tecnologie con cui realizzo soluzioni moderne, scalabili e manutenibili",
+    "additionalInfo": "La mia esperienza completa in frontend, backend e infrastruttura mi consente di gestire l’intero ciclo di sviluppo. Questo approccio mi permette di progettare e realizzare soluzioni solide, dalla pianificazione alla produzione.",
+    "frontend": {
+      "title": "Frontend",
+      "description": "Sviluppo interfacce responsive, accessibili e performanti utilizzando framework e strumenti moderni."
+    },
+    "backend": {
+      "title": "Backend",
+      "description": "Progetto API e applicazioni server-side scalabili, basate su architetture robuste e database ben strutturati."
+    },
+    "infrastructure": {
+      "title": "Infrastruttura",
+      "description": "Gestisco infrastrutture cloud, pipeline CI/CD e ambienti containerizzati per deployment efficienti e sicuri."
+    }
+  },
+  "projects": {
+    "title": "Progetti in Evidenza",
+    "subtitle": "Alcuni progetti selezionati a cui ho lavorato",
+    "viewCode": "Vedi Codice",
+    "liveDemo": "Demo Live",
+    "visitWebsite": "Visita il Sito",
+    "viewAllProjects": "Scopri tutti i progetti su GitHub",
+    "items": [
+      {
+        "name": "Termcord",
+        "description": "Un client Discord da terminale, pensato per sviluppatori che preferiscono le interfacce a riga di comando.",
+        "technologies": ["TypeScript", "Node.js", "Terminal UI"],
+        "demo": null,
+        "github": "https://github.com/emanuele-toma/termcord",
+        "image": "/images/projects/termcord.png"
+      },
+      {
+        "name": "OverLLM",
+        "description": "Applicazione overlay per interagire con qualsiasi LLM, locale o via API, integrando l’AI in modo fluido.",
+        "technologies": ["TypeScript", "Tauri", "AI/ML"],
+        "demo": null,
+        "github": "https://github.com/emanuele-toma/overllm",
+        "image": "/images/projects/overllm.png"
+      },
+      {
+        "name": "Axios Tor",
+        "description": "Libreria per usare Axios attraverso la rete Tor e inviare richieste in modo anonimo.",
+        "technologies": ["TypeScript", "Axios", "Tor", "Networking"],
+        "demo": null,
+        "github": "https://github.com/emanuele-toma/axios-tor",
+        "image": "/images/projects/axiostor.png"
+      },
+      {
+        "name": "codicefiscale.dev",
+        "description": "Servizio API per la validazione dei codici fiscali italiani con verifica tramite l’Agenzia delle Entrate.",
+        "technologies": ["TypeScript", "API", "Integrazione Agenzia Entrate"],
+        "demo": "https://codicefiscale.dev",
+        "github": null,
+        "image": "/images/projects/codicefiscaledev.png"
+      }
+    ]
+  },
+  "experience": {
+    "title": "Esperienza",
+    "subtitle": "Il mio percorso professionale e formativo",
+    "website": "Visita il Sito",
+    "keyResponsibilities": "Responsabilità principali:",
+    "technologiesUsed": "Tecnologie utilizzate:",
+    "currentStatus": "Attualmente disponibile per nuove opportunità",
+    "items": [
+      {
+        "company": "AISent",
+        "role": "Sviluppatore Frontend + Infrastruttura",
+        "period": "Lug 2023 - Presente",
+        "description": "Sviluppo di progetti frontend in ambienti Cloud e On Premise e gestione dell’infrastruttura su AWS.",
+        "responsibilities": [
+          "Sviluppo e manutenzione di interfacce utente in React",
+          "Integrazione di TypeScript per maggiore affidabilità del codice",
+          "Gestione della containerizzazione con Docker e deployment",
+          "Progettazione e manutenzione dell’infrastruttura AWS",
+          "Automazione dell’infrastruttura con Terraform"
+        ],
+        "technologies": ["React", "TypeScript", "Docker", "AWS", "Terraform"],
+        "image": "/companies/aisent.png",
+        "website": "https://aisent.io/it"
+      },
+      {
+        "company": "ITS Fondazione Jobs Academy",
+        "role": "Corso di Sviluppo Cloud",
+        "period": "Set 2023 - Presente",
+        "description": "Percorso intensivo sulle moderne pratiche di sviluppo cloud e tecnologie emergenti.",
+        "responsibilities": [
+          "Sviluppo e automazione di pipeline CI/CD",
+          "Containerizzazione con Docker e orchestrazione",
+          "Studio di machine learning e deep learning in Python",
+          "Competenze pratiche in cybersecurity",
+          "Approfondimento delle metodologie DevOps",
+          "Sviluppo di applicazioni con React, Vue, Angular e React Native",
+          "Integrazione e sviluppo in ambito IoT",
+          "Esperienza con database NoSQL come MongoDB"
+        ],
+        "technologies": ["Docker", "Git", "Python", "React", "Vue", "Angular", "TypeScript", "MongoDB", "IoT"],
+        "image": "/companies/jac.png",
+        "website": "https://jac-its.it/it/"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contattami",
+    "subtitle": "Connettiamoci e costruiamo qualcosa di significativo insieme",
+    "email": "emanuele@toma.gg",
+    "getInTouch": "Contattami",
+    "emailLabel": "Email",
+    "findMeOn": "Mi trovi anche su",
+    "lookingForCollaboration": "Cerchi una collaborazione?",
+    "collaborationText": "Sono sempre aperto a nuove opportunità e progetti stimolanti. Se stai cercando un collaboratore affidabile o vuoi discutere un’idea, scrivimi pure!",
+    "sendMessage": "Invia un messaggio",
+    "validation": {
+      "nameRequired": "Il nome è obbligatorio",
+      "emailRequired": "L'email è obbligatoria",
+      "emailInvalid": "Inserisci un indirizzo email valido",
+      "messageRequired": "Il messaggio è obbligatorio",
+      "messageMinLength": "Il messaggio deve contenere almeno 10 caratteri"
+    },
+    "form": {
+      "name": "Nome",
+      "email": "Email",
+      "message": "Messaggio",
+      "send": "Invia messaggio",
+      "sending": "Invio in corso...",
+      "success": "Messaggio inviato con successo!",
+      "error": "Si è verificato un errore. Riprova."
+    },
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "resume": "Curriculum",
+      "email": "Email"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Emanuele Toma. Tutti i diritti riservati.",
+    "built": "Realizzato usando Astro"
+  },
+  "about": {
+    "title": "Chi sono",
+    "intro": {
+      "passionate": "Sono un appassionato",
+      "role": "Sviluppatore Web e Ingegnere DevOps",
+      "description": "che si dedica a costruire soluzioni scalabili ed efficienti, colmando il divario tra sviluppo e operations."
+    },
+    "description": {
+      "fullStack": "Grazie alla mia esperienza full stack, mi occupo con passione sia della realizzazione di interfacce intuitive sia della progettazione di architetture cloud resilienti. Il mio lavoro unisce le pratiche moderne di sviluppo con un approccio ingegneristico solido e pragmatico."
+    },
+    "whatIDo": {
+      "frontend": {
+        "title": "Sviluppo Frontend",
+        "description": "Costruisco applicazioni web responsive e accessibili con framework moderni come React, Next.js e Astro."
+      },
+      "backend": {
+        "title": "Sviluppo Backend",
+        "description": "Sviluppo API e applicazioni server-side scalabili con TypeScript, Node.js e vari database."
+      },
+      "devops": {
+        "title": "DevOps & Infrastruttura",
+        "description": "Progetto e gestisco infrastrutture cloud, pipeline CI/CD e sistemi containerizzati."
+      }
+    },
+    "personalTouch": "Quando non programmo, esploro nuove tecnologie, contribuisco a progetti open-source e approfondisco le ultime novità su AI e cloud computing. Credo che un buon software nasca dalla curiosità e dalla voglia continua di imparare."
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Si è verificato un errore",
+    "retry": "Riprova",
+    "close": "Chiudi",
+    "open": "Apri",
+    "menu": "Menu"
+  }
+}
