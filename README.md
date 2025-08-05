@@ -6,7 +6,7 @@
 
 - **🎨 Modern Design** - Clean, minimalist design with smooth animations and gradients
 - **� Fully Responsive** - Optimized for all device sizes and screen resolutions
-- **🌍 Internationalization** - Multi-language support (English/Italian) with astro-i18next
+- **🌍 Internationalization** - Multi-language support (English/Italian)
 - **⚡ Performance Optimized** - Built with Astro for lightning-fast loading times
 - **🎭 Interactive Components** - Smooth scrolling, hover effects, and engaging animations
 - **📄 Resume Download** - Easy access to downloadable resume in PDF format
@@ -119,7 +119,7 @@
 
 ## 🌍 Internationalization
 
-This portfolio supports multiple languages through astro-i18next:
+This portfolio supports multiple languages:
 
 - **English** (`en`) - Default language
 - **Italian** (`it`) - Secondary language
@@ -184,3 +184,4 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 ⭐ **If you found this portfolio inspiring, please consider giving it a star on GitHub!**
+
