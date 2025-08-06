@@ -67,20 +67,17 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ top = false, mobile
         <div className="flex flex-col space-y-1">
           <ul className="pt-2">
             {languages.map(lang => (
-              <>
-                <li className="px-2">
-                  <button
-                    key={lang.code}
-                    onClick={() => handleLanguageChange(lang.code)}
-                    className={`flex items-center space-x-2.5 w-full px-2.5 py-3 text-left text-slate-300 hover:bg-slate-700 hover:text-white transition-colors rounded-lg ${
-                      currentLang === lang.code ? 'bg-slate-700 text-white' : ''
-                    }`}
-                  >
-                    <Icon icon={lang.flag} className="w-5 h-5 -mb-[2px]" />
-                    <span>{lang.name}</span>
-                  </button>
-                </li>
-              </>
+              <li className="px-2" key={lang.code}>
+                <button
+                  onClick={() => handleLanguageChange(lang.code)}
+                  className={`flex items-center space-x-2.5 w-full px-2.5 py-3 text-left text-slate-300 hover:bg-slate-700 hover:text-white transition-colors rounded-lg ${
+                    currentLang === lang.code ? 'bg-slate-700 text-white' : ''
+                  }`}
+                >
+                  <Icon icon={lang.flag} className="w-5 h-5 -mb-[2px]" />
+                  <span>{lang.name}</span>
+                </button>
+              </li>
             ))}
           </ul>
         </div>
