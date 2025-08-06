@@ -47,7 +47,7 @@
       {
         "name": "Termcord",
         "description": "A terminal-based frontend for Discord, built for developers who prefer command-line interfaces.",
-        "technologies": ["TypeScript", "Node.js", "Terminal UI"],
+        "technologies": ["Python", "Textual", "Terminal UI"],
         "demo": null,
         "github": "https://github.com/emanuele-toma/termcord",
         "image": "/images/projects/termcord.png"

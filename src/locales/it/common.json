@@ -47,7 +47,7 @@
       {
         "name": "Termcord",
         "description": "Un client Discord da terminale, pensato per sviluppatori che preferiscono le interfacce a riga di comando.",
-        "technologies": ["TypeScript", "Node.js", "Terminal UI"],
+        "technologies": ["Python", "Textual", "Terminal UI"],
         "demo": null,
         "github": "https://github.com/emanuele-toma/termcord",
         "image": "/images/projects/termcord.png"
