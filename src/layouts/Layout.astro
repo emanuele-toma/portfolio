@@ -1,5 +1,5 @@
 ---
-import "@/styles/global.css";
+import '@/styles/global.css';
 
 export interface Props {
   title?: string;
@@ -8,11 +8,11 @@ export interface Props {
   canonical?: string;
 }
 
-const { 
-  title = "Emanuele Toma - Web Developer and DevOps", 
+const {
+  title = 'Emanuele Toma - Web Developer and DevOps',
   description = "Hi, I'm Emanuele Toma, a Web Developer and DevOps Engineer. I craft efficient web solutions and robust infrastructure, bridging the gap between development and operations.",
-  keywords = "Emanuele Toma, Web Developer, DevOps Engineer, Cloud, Infrastructure, Automation",
-  canonical = "https://toma.gg"
+  keywords = 'Emanuele Toma, Web Developer, DevOps Engineer, Cloud, Infrastructure, Automation',
+  canonical = 'https://toma.gg',
 } = Astro.props;
 ---
 
@@ -27,7 +27,7 @@ const {
     <meta name="keywords" content={keywords} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
@@ -40,13 +40,22 @@ const {
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    
+
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <slot />
+    <script>
+      import Tracker from '@openreplay/tracker';
+
+      const tracker = new Tracker({
+        projectKey: 'K3FtY9IVWTvWwSxtVS5N',
+      });
+      
+      tracker.start();
+    </script>
   </body>
 </html>
 
