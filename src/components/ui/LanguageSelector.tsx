@@ -36,52 +36,55 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({ top = false, mobile
     setCurrentLang(langCode);
   };
 
+  if (mobile) {
+    return (
+      <div className="flex flex-col space-y-1">
+        <div className="px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Language</div>
+        <div className="grid grid-cols-2 gap-2 px-2">
+          {languages.map(lang => (
+            <button
+              key={lang.code}
+              onClick={() => handleLanguageChange(lang.code)}
+              className={`flex items-center justify-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                currentLang === lang.code
+                  ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
+                  : 'bg-white/5 text-slate-400 border border-white/5 hover:bg-white/10'
+              }`}
+            >
+              <Icon icon={lang.flag} className="w-4 h-4 rounded-sm" />
+              <span className="text-sm font-medium">{lang.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative group">
-      {!mobile && (
-        <button className="flex items-center space-x-2 px-3 py-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-700/50">
-          <Icon icon={'lucide:globe'} className="w-4 h-4" />
-        </button>
-      )}
+      <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-200">
+        <Icon icon="lucide:globe" className="w-4 h-4" />
+      </button>
 
       <div
-        className={`absolute ${top ? 'top-full' : 'bottom-full'} left-0 ${top ? 'mt-1' : 'mb-1'} bg-slate-800 border border-slate-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px] z-50`}
+        className={`absolute ${top ? 'top-full mt-2' : 'bottom-full mb-2'} right-0 w-32 p-1 glass-card rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-bottom-right z-50`}
       >
         {languages.map(lang => (
           <button
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
-            className={`w-full flex items-center space-x-2 px-3 py-2 text-left hover:bg-slate-700 transition-colors first:rounded-t-lg last:rounded-b-lg ${
-              currentLang === lang.code ? 'bg-slate-700 text-white' : 'text-slate-300'
+            className={`w-full flex items-center space-x-2 px-2 py-1.5 rounded-lg text-left transition-all duration-200 ${
+              currentLang === lang.code
+                ? 'bg-cyan-500/10 text-cyan-400'
+                : 'text-slate-300 hover:bg-white/5 hover:text-white'
             }`}
           >
-            <span>
-              <Icon icon={lang.flag} className="w-5 h-5" />
-            </span>
-            <span className="text-sm">{lang.name}</span>
+            <Icon icon={lang.flag} className="w-4 h-4 rounded-sm shadow-sm" />
+            <span className="text-xs font-medium">{lang.name}</span>
+            {currentLang === lang.code && <Icon icon="lucide:check" className="w-3 h-3 ml-auto" />}
           </button>
         ))}
       </div>
-
-      {mobile && (
-        <div className="flex flex-col space-y-1">
-          <ul className="pt-2">
-            {languages.map(lang => (
-              <li className="px-2" key={lang.code}>
-                <button
-                  onClick={() => handleLanguageChange(lang.code)}
-                  className={`flex items-center space-x-2.5 w-full px-2.5 py-3 text-left text-slate-300 hover:bg-slate-700 hover:text-white transition-colors rounded-lg ${
-                    currentLang === lang.code ? 'bg-slate-700 text-white' : ''
-                  }`}
-                >
-                  <Icon icon={lang.flag} className="w-5 h-5 -mb-[2px]" />
-                  <span>{lang.name}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
