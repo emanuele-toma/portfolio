@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { Nav } from '../../features/navigation/components/nav';
+import { BitsSearch } from '../../features/bits/components/bits-search';
+import { Footer } from '../../components/footer/footer';
+import { t } from '../../lib/i18n';
+import { bitSlug } from '../../features/bits/slug';
+import type { Lang } from '../../types/index';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'it' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const bits = await getCollection('bits');
+const sorted = [...bits].sort((a, b) => a.data.order - b.data.order);
+
+const links = [
+  { key: 'home' as const, label: t(lang, 'nav.home'), href: `/${lang}/` },
+  { key: 'bits' as const, label: t(lang, 'nav.bits'), href: `/${lang}/bits` },
+  { key: 'contact' as const, label: t(lang, 'nav.contact'), href: `/${lang}/contact` },
+];
+
+const langLinks = [
+  { lang: 'en' as Lang, href: '/en/bits' },
+  { lang: 'it' as Lang, href: '/it/bits' },
+];
+---
+
+<Layout title={t(lang, 'meta.title.bits')} lang={lang}>
+  <Nav current="bits" lang={lang} links={links} langLinks={langLinks} client:load />
+
+  <main class="parchment flex-1 pb-24">
+    <section class="relative py-12 max-[720px]:py-8">
+      <div class="relative mx-auto w-full max-w-295 px-8 max-[720px]:px-6">
+        <div class="mb-8 max-[720px]:mb-6 text-center">
+          <div class="t-smcaps inline-block mb-3 text-gold-deep">Scriptorium</div>
+          <h2 class="mb-3 font-blackletter text-[clamp(2.4rem,4.4vw,3.4rem)] font-normal tracking-[.02em] text-ink-2">
+            {t(lang, 'bits.title')}
+          </h2>
+          <div class="text-[1.05rem] italic text-ink-on-parchment-soft">{t(lang, 'bits.lede')}</div>
+        </div>
+
+        <BitsSearch
+          placeholder={t(lang, 'bits.search.placeholder')}
+          emptyLabel={t(lang, 'bits.search.empty')}
+          client:load
+        />
+
+        <div class="grid grid-cols-3 gap-6 max-[900px]:grid-cols-2 max-[640px]:grid-cols-1">
+          {
+            sorted.map(bit => {
+              const slug = bitSlug(bit.id);
+              const haystack = `${bit.data.title} ${bit.data.summary}`.toLowerCase();
+              return (
+                <a
+                  class="bit-card group flex flex-col no-underline"
+                  href={`/${lang}/bits/${slug}`}
+                  data-bit-search={haystack}
+                >
+                  {bit.data.thumbnail && (
+                    <Image
+                      src={bit.data.thumbnail}
+                      alt={bit.data.title}
+                      class="mb-4 aspect-video w-full border border-gold-dim object-cover"
+                    />
+                  )}
+                  <span class="mb-2 font-smcaps text-[.82rem] tracking-[.18em] max-[640px]:tracking-[.08em] text-ink-on-parchment-soft">
+                    {bit.data.dateFormatted}
+                  </span>
+                  <h3 class="mb-3 font-blackletter text-[1.5rem] font-normal leading-tight tracking-normal text-ink-2 group-hover:text-crimson">
+                    {bit.data.title}
+                  </h3>
+                  <p class="m-0 text-[.98rem] leading-relaxed text-ink-on-parchment">{bit.data.summary}</p>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer copy={t(lang, 'foot.copy')} client:load />
+</Layout>

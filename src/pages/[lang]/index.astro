@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Nav } from '../../features/navigation/components/nav';
+import { Footer } from '../../components/footer/footer';
+import { t } from '../../lib/i18n';
+import type { Lang } from '../../types/index';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'it' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
+
+const links = [
+  { key: 'home' as const, label: t(lang, 'nav.home'), href: `/${lang}/` },
+  { key: 'bits' as const, label: t(lang, 'nav.bits'), href: `/${lang}/bits` },
+  { key: 'contact' as const, label: t(lang, 'nav.contact'), href: `/${lang}/contact` },
+];
+
+const langLinks = [
+  { lang: 'en' as Lang, href: '/en/' },
+  { lang: 'it' as Lang, href: '/it/' },
+];
+---
+
+<Layout title={t(lang, 'meta.title.home')} lang={lang}>
+  <Nav current="home" lang={lang} links={links} langLinks={langLinks} client:load />
+
+  <main class="parchment flex flex-1 items-center py-10 max-[720px]:py-8">
+    <div class="relative mx-auto w-full max-w-295 px-8 max-[720px]:px-6">
+      <div class="relative mx-auto max-w-190 text-center">
+        <div
+          class="mb-4 inline-flex items-center gap-3 font-carved text-[.85rem] uppercase tracking-[.3em] max-[600px]:tracking-[.14em] text-crimson before:h-px before:w-7 before:bg-crimson before:content-[''] after:h-px after:w-7 after:bg-crimson after:content-['']"
+        >
+          <span>{t(lang, 'intro.kicker')}</span>
+        </div>
+        <h1
+          class="mb-3 font-blackletter text-[clamp(2.8rem,6vw,4.6rem)] font-normal leading-[.95] tracking-normal text-ink-2"
+        >
+          Emanuele Toma
+        </h1>
+        <div class="mb-8 max-[720px]:mb-6 font-carved text-[.9rem] uppercase tracking-[.26em] max-[600px]:tracking-[.12em] text-ink-on-parchment-soft">
+          {t(lang, 'hero.kicker')}
+        </div>
+
+        <div class="intro-card mx-auto max-w-155">
+          <div class="grid grid-cols-[88px_1fr] items-start gap-6 max-[600px]:grid-cols-1 max-[600px]:gap-3">
+            <div
+              class="text-right font-blackletter text-[1.8rem] leading-none text-crimson max-[600px]:text-left max-[600px]:text-[1.5rem]"
+            >
+              I.
+            </div>
+            <div class="text-ink-on-parchment">
+              <span class="mb-1 block font-carved text-[1rem] uppercase tracking-[.26em] max-[600px]:tracking-[.12em] text-ink-2">
+                {t(lang, 'intro.now.label')}
+              </span>
+              <p class="m-0 text-[1.05rem] leading-[1.55] text-pretty">
+                {t(lang, 'intro.now.text')}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[88px_1fr] items-start gap-6 max-[600px]:grid-cols-1 max-[600px]:gap-3">
+            <div
+              class="text-right font-blackletter text-[1.8rem] leading-none text-crimson max-[600px]:text-left max-[600px]:text-[1.5rem]"
+            >
+              II.
+            </div>
+            <div class="text-ink-on-parchment">
+              <span class="mb-1 block font-carved text-[1rem] uppercase tracking-[.26em] max-[600px]:tracking-[.12em] text-ink-2">
+                {t(lang, 'intro.trained.label')}
+              </span>
+              <p class="m-0 text-[1.05rem] leading-[1.55] text-pretty">
+                {t(lang, 'intro.trained.text')}
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-[88px_1fr] items-start gap-6 max-[600px]:grid-cols-1 max-[600px]:gap-3">
+            <div
+              class="text-right font-blackletter text-[1.8rem] leading-none text-crimson max-[600px]:text-left max-[600px]:text-[1.5rem]"
+            >
+              III.
+            </div>
+            <div class="text-ink-on-parchment">
+              <span class="mb-1 block font-carved text-[1rem] uppercase tracking-[.26em] max-[600px]:tracking-[.12em] text-ink-2">
+                {t(lang, 'intro.side.label')}
+              </span>
+              <p class="m-0 text-[1.05rem] leading-[1.55] text-pretty">
+                {t(lang, 'intro.side.text')}
+              </p>
+              <a
+                class="mt-3 inline-block border-b border-current pb-0.5 font-carved text-[.8rem] uppercase tracking-[.2em] text-crimson hover:text-ink-2"
+                href="https://github.com/emanuele-toma"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                {t(lang, 'intro.side.cta')}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 max-[720px]:mt-6 flex flex-wrap justify-center gap-4">
+          <a class="btn btn-gold" href={`/${lang}/contact`}>
+            <span>{t(lang, 'hero.cta.hail')}</span>
+          </a>
+          <a class="btn" href={`/${lang}/bits`}>
+            <span>{t(lang, 'nav.bits')}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer copy={t(lang, 'foot.copy')} client:load />
+</Layout>

@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Nav } from '../../features/navigation/components/nav';
+import { ContactForm } from '../../features/contact/components/contact-form';
+import { Footer } from '../../components/footer/footer';
+import { t } from '../../lib/i18n';
+import type { Lang } from '../../types/index';
+import { getSecret } from 'astro:env/server';
+
+export const prerender = false;
+
+const { lang } = Astro.params as { lang: Lang };
+
+const links = [
+  { key: 'home' as const, label: t(lang, 'nav.home'), href: `/${lang}/` },
+  { key: 'bits' as const, label: t(lang, 'nav.bits'), href: `/${lang}/bits` },
+  { key: 'contact' as const, label: t(lang, 'nav.contact'), href: `/${lang}/contact` },
+];
+
+const langLinks = [
+  { lang: 'en' as Lang, href: '/en/contact' },
+  { lang: 'it' as Lang, href: '/it/contact' },
+];
+
+const formLabels = {
+  title: t(lang, 'contact.title'),
+  lede: t(lang, 'contact.lede'),
+  name: t(lang, 'contact.form.name'),
+  email: t(lang, 'contact.form.email'),
+  msg: t(lang, 'contact.form.msg'),
+  send: t(lang, 'contact.form.send'),
+  thanks: t(lang, 'contact.thanks'),
+};
+
+const link =
+  'flex items-center justify-between border-none py-3 font-carved text-[.9rem] uppercase tracking-[.18em] max-[600px]:tracking-[.1em] text-ink-2 hover:text-crimson';
+const value = 'font-body text-[.92rem] normal-case italic tracking-[.01em] text-ink-on-parchment-soft';
+---
+
+<Layout title={t(lang, 'meta.title.contact')} lang={lang}>
+  <Nav current="contact" lang={lang} links={links} langLinks={langLinks} client:load />
+
+  <main class="parchment flex-1 pb-24">
+    <section class="relative py-12 max-[720px]:py-8">
+      <div class="relative mx-auto w-full max-w-295 px-8 max-[720px]:px-6">
+        <div class="mb-10 max-[720px]:mb-6 text-center">
+          <div class="t-smcaps inline-block mb-3 text-gold-deep">{t(lang, 'nav.contact')}</div>
+          <h2 class="mb-3 font-blackletter text-[clamp(2.4rem,4.4vw,3.4rem)] font-normal tracking-[.02em] text-ink-2">
+            {t(lang, 'contact.title')}
+          </h2>
+          <div class="text-[1.05rem] italic text-ink-on-parchment-soft">
+            {t(lang, 'contact.lede')}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-[1.3fr_1fr] items-start gap-12 max-[860px]:grid-cols-1">
+          <ContactForm labels={formLabels} accessKey={getSecret('CONTACT_FORM_ACCESS_KEY') ?? ''} client:load />
+
+          <aside>
+            <h3 class="mb-4 font-blackletter text-[1.7rem] font-normal tracking-normal text-ink-2">
+              {t(lang, 'contact.aside.title')}
+            </h3>
+            <ul
+              class="m-0 mb-8 flex list-none flex-col p-0 [&>li+li]:border-t [&>li+li]:border-dashed [&>li+li]:border-gold-dim"
+            >
+              <li>
+                <a class={link} href="mailto:emanuele@toma.gg">
+                  <span>{t(lang, 'contact.aside.email')}</span>
+                  <span class={value}>emanuele@toma.gg</span>
+                </a>
+              </li>
+              <li>
+                <a class={link} href="https://github.com/emanuele-toma" target="_blank" rel="noreferrer noopener">
+                  <span>{t(lang, 'contact.aside.gh')}</span>
+                  <span class={value}>@emanuele-toma</span>
+                </a>
+              </li>
+              <li>
+                <a class={link} href="https://linkedin.com/in/emanuele-toma" target="_blank" rel="noreferrer noopener">
+                  <span>{t(lang, 'contact.aside.li')}</span>
+                  <span class={value}>/in/emanuele-toma</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer copy={t(lang, 'foot.copy')} client:load />
+</Layout>

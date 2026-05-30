@@ -1,0 +1,549 @@
+@import 'tailwindcss';
+
+@theme {
+  /* —— Palette ——————————————————————————————————————— */
+  --color-ink: #1f1a14; /* deepest, near-black brown */
+  --color-ink-2: #2a2520; /* primary dark ground */
+  --color-ink-3: #3a3128; /* raised dark surfaces */
+
+  --color-gold: #d4af37; /* heraldic gold (or) */
+  --color-gold-bright: #e8c252; /* highlight */
+  --color-gold-dim: #9a7d2a; /* engraved gold border */
+  --color-gold-deep: #5a4716; /* deep gilt shadow */
+
+  --color-crimson: #722f37; /* heraldic gules */
+  --color-crimson-bright: #8e3a44;
+  --color-crimson-deep: #4a1f25;
+
+  --color-parchment: #e8dcc4; /* page ground */
+  --color-parchment-dk: #d4c2a3;
+  --color-parchment-lt: #f1e8d2;
+  --color-parchment-shade: #b9a484;
+
+  --color-ink-on-parchment: #2a1f15; /* body type on parchment */
+  --color-ink-on-parchment-soft: #5a4a36;
+
+  /* —— Type ——————————————————————————————————————————— */
+  --font-blackletter: 'Pirata One', serif;
+  --font-carved: 'Grenze', serif;
+  --font-body: serif;
+  --font-smcaps: 'Grenze', serif;
+
+  /* —— Shadows —————————————————————————————————————— */
+  --shadow-soft: 0 1px 0 rgba(0, 0, 0, 0.15), 0 12px 24px -16px rgba(0, 0, 0, 0.35);
+  --shadow-deep: 0 2px 0 rgba(0, 0, 0, 0.25), 0 28px 50px -24px rgba(0, 0, 0, 0.55);
+
+  /* —— Animation —————————————————————————————————————— */
+  --animate-pulse-seal: pulse-seal 2.4s infinite;
+
+  @keyframes pulse-seal {
+    0% {
+      box-shadow: 0 0 0 0 rgba(114, 47, 55, 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(114, 47, 55, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(114, 47, 55, 0);
+    }
+  }
+}
+
+/* =========================================================
+   BASE / RESET
+   ========================================================= */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--color-ink-on-parchment);
+    background: var(--color-ink-2);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+  a:hover {
+    color: var(--color-crimson);
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-carved);
+    color: var(--color-ink-2);
+    margin: 0;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+  h2 {
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+    letter-spacing: 0.22em;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 1.25rem;
+    letter-spacing: 0.26em;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 1rem;
+    letter-spacing: 0.26em;
+    font-weight: 600;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+}
+
+/* =========================================================
+   CUSTOM UTILITIES
+   ========================================================= */
+
+/* Engraved small-caps label */
+@utility t-smcaps {
+  font-family: var(--font-smcaps);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+/* =========================================================
+   COMPONENTS — surfaces, ornaments, widgets that rely on
+   gradients, procedural textures, or pseudo-elements.
+   ========================================================= */
+
+@layer components {
+  /* Parchment ground — for content pages */
+  .parchment {
+    position: relative;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 20%, rgba(120, 90, 50, 0.1), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 80% 80%, rgba(100, 70, 30, 0.12), transparent 60%),
+      radial-gradient(
+        circle at 50% 50%,
+        var(--color-parchment-lt),
+        var(--color-parchment) 60%,
+        var(--color-parchment-dk) 100%
+      );
+    background-color: var(--color-parchment);
+    color: var(--color-ink-on-parchment);
+  }
+  .parchment::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.2  0 0 0 0 0.14  0 0 0 0 0.08  0 0 0 .14 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    z-index: 0;
+  }
+  .parchment > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ink ground — for nav/footer */
+  .ink-ground {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
+      linear-gradient(180deg, var(--color-ink-2), var(--color-ink) 80%);
+    color: var(--color-parchment-lt);
+  }
+  .ink-ground::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 .9  0 0 0 0 .75  0 0 0 0 .4  0 0 0 .04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.9;
+    z-index: 0;
+  }
+
+  /* Pressed-metal action button with engraved corner brackets */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 14px 26px;
+    font-family: var(--font-carved);
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    background: var(--color-ink-2);
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold-dim);
+    position: relative;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      color 0.2s,
+      transform 0.15s;
+  }
+  .btn:hover {
+    background: var(--color-ink);
+    color: var(--color-gold-bright);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn::before,
+  .btn::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid currentColor;
+    opacity: 0.6;
+  }
+  .btn::before {
+    top: 4px;
+    left: 4px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .btn::after {
+    bottom: 4px;
+    right: 4px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .btn-gold {
+    background: linear-gradient(180deg, var(--color-gold-bright), var(--color-gold) 50%, var(--color-gold-dim));
+    color: var(--color-ink);
+    border-color: var(--color-gold-deep);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 230, 150, 0.5),
+      0 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(180deg, var(--color-gold-bright), var(--color-gold) 50%, var(--color-gold-dim));
+    color: var(--color-ink);
+    filter: brightness(1.06);
+  }
+
+  /* Wax seal — the signature stamp */
+  .wax-seal {
+    width: 88px;
+    height: 88px;
+    position: relative;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #a64349 0%, #722f37 50%, #4a1f25 100%);
+    box-shadow:
+      inset 0 2px 6px rgba(255, 180, 180, 0.25),
+      inset 0 -8px 14px rgba(0, 0, 0, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold-bright);
+    font-family: var(--font-blackletter);
+    font-size: 2.2rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  }
+  .wax-seal::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+  }
+  .wax-seal::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 22px;
+    bottom: -10px;
+    right: 14px;
+    background: radial-gradient(circle at 50% 30%, #8e3a44, #4a1f25 80%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: rotate(15deg);
+    box-shadow: inset 0 -4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Inline command line — emitted from MDX bits content */
+  .code-line {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-ink-2);
+    color: var(--color-gold-bright);
+    font-family: 'Grenze', monospace;
+    letter-spacing: 0.04em;
+    font-size: 0.92rem;
+    border-left: 3px solid var(--color-crimson);
+  }
+
+  /* Navigation links */
+  .nav-link {
+    position: relative;
+    white-space: nowrap;
+    border: none;
+    padding: 8px 18px 9px;
+    font-family: var(--font-carved);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--color-parchment);
+    transition: color 0.2s;
+  }
+  .nav-link:hover {
+    color: var(--color-gold-bright);
+  }
+  .nav-link[aria-current='page'] {
+    color: var(--color-gold);
+  }
+  .nav-link[aria-current='page']::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: var(--color-gold);
+  }
+  @media (max-width: 1180px) {
+    .nav-link {
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+    }
+    .nav-link[aria-current='page']::after {
+      left: 10px;
+      right: 10px;
+    }
+  }
+  @media (max-width: 880px) {
+    .nav-link {
+      display: block;
+      padding: 14px 24px;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+    }
+    .nav-link[aria-current='page'] {
+      background: rgba(212, 175, 55, 0.08);
+    }
+    .nav-link[aria-current='page']::after {
+      display: none;
+    }
+  }
+
+  /* Navigation menu — collapses to a dropdown on mobile */
+  .nav-menu {
+    display: flex;
+    flex: 1;
+    list-style: none;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+  }
+  @media (max-width: 880px) {
+    .nav-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      max-height: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      overflow: hidden;
+      background: var(--color-ink);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+      transition: max-height 250ms;
+    }
+    .nav-menu[data-open='true'] {
+      max-height: 70vh;
+    }
+    .nav-menu > li:first-child {
+      padding-top: 8px;
+    }
+    .nav-menu > li:last-child {
+      padding-bottom: 8px;
+    }
+    .nav-menu > li + li {
+      border-top: 1px solid rgba(154, 125, 42, 0.25);
+    }
+  }
+
+  /* Language switcher buttons */
+  .lang-btn {
+    border: none;
+    background: none;
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    text-transform: uppercase;
+    letter-spacing: inherit;
+    color: var(--color-parchment-shade);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+  .lang-btn + .lang-btn {
+    border-left: 1px solid var(--color-gold-dim);
+  }
+  .lang-btn[aria-pressed='true'] {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  /* Site header (navigation bar) */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    isolation: isolate;
+    border-bottom: 1px solid var(--color-gold-deep);
+    background: linear-gradient(180deg, var(--color-ink) 0%, var(--color-ink-2) 100%);
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.18), transparent 18%);
+  }
+
+  /* Site footer */
+  .site-footer {
+    position: relative;
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid var(--color-gold-deep);
+    background: linear-gradient(180deg, var(--color-ink-2), var(--color-ink) 100%);
+  }
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 0.25rem;
+    opacity: 0.55;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-gold-deep) 0,
+      var(--color-gold-deep) 8px,
+      var(--color-gold-dim) 8px,
+      var(--color-gold-dim) 16px
+    );
+  }
+
+  /* Intro bio card (home page diamond-border separator) */
+  .intro-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-top: 1px solid var(--color-gold-dim);
+    border-bottom: 1px solid var(--color-gold-dim);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    text-align: left;
+  }
+  .intro-card::before,
+  .intro-card::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 0.5625rem;
+    height: 0.5625rem;
+    transform: translateX(-50%) rotate(45deg);
+    border: 1px solid var(--color-gold-dim);
+    background: var(--color-parchment-lt);
+  }
+  .intro-card::before {
+    top: -0.3125rem;
+  }
+  .intro-card::after {
+    bottom: -0.3125rem;
+  }
+
+  /* Bit card — used both as an index grid item (a link) and the detail header */
+  .bit-card {
+    position: relative;
+    border: 1px solid var(--color-gold-dim);
+    background: var(--color-parchment-lt);
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s,
+      transform 0.2s;
+  }
+  .bit-card::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0.375rem;
+    border: 1px solid rgba(154, 125, 42, 0.35);
+  }
+  a.bit-card:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.45);
+    transform: translateY(-2px);
+  }
+
+  /* Contact form card */
+  .form-card {
+    position: relative;
+    border: 1px solid var(--color-gold-dim);
+    padding: 3rem;
+    box-shadow: var(--shadow-soft);
+    background: linear-gradient(180deg, var(--color-parchment-lt), var(--color-parchment));
+  }
+  .form-card::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0.5rem;
+    border: 1px solid rgba(154, 125, 42, 0.5);
+  }
+}
+
+/* Unlayered — wins over theme-generated @layer utilities. Sets a default
+   weight for carved font everywhere the utility class is used. */
+.font-carved {
+  font-weight: 500;
+}

@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import type { Lang } from '../types/index';
+
+interface Props {
+  title: string;
+  lang: Lang;
+}
+
+const { title, lang } = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Grenze:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Pirata+One&display=swap" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <slot />
+    <script>
+      import '../scripts/app.ts';
+    </script>
+  </body>
+</html>

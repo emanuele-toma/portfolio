@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import { Nav } from '../../../features/navigation/components/nav';
+import { Footer } from '../../../components/footer/footer';
+import { t } from '../../../lib/i18n';
+import { bitSlug } from '../../../features/bits/slug';
+import type { Lang } from '../../../types/index';
+
+export async function getStaticPaths() {
+  const bits = await getCollection('bits');
+  const langs: Lang[] = ['en', 'it'];
+  return langs.flatMap(lang =>
+    bits.map(bit => ({
+      params: { lang, slug: bitSlug(bit.id) },
+      props: { bit },
+    })),
+  );
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const { bit } = Astro.props;
+const { Content } = await render(bit);
+
+const slug = bitSlug(bit.id);
+
+const links = [
+  { key: 'home' as const, label: t(lang, 'nav.home'), href: `/${lang}/` },
+  { key: 'bits' as const, label: t(lang, 'nav.bits'), href: `/${lang}/bits` },
+  { key: 'contact' as const, label: t(lang, 'nav.contact'), href: `/${lang}/contact` },
+];
+
+const langLinks = [
+  { lang: 'en' as Lang, href: `/en/bits/${slug}` },
+  { lang: 'it' as Lang, href: `/it/bits/${slug}` },
+];
+---
+
+<Layout title={`${bit.data.title} - Emanuele Toma`} lang={lang}>
+  <Nav current="bits" lang={lang} links={links} langLinks={langLinks} client:load />
+
+  <main class="parchment flex-1 pb-24">
+    <section class="relative py-12">
+      <div class="relative mx-auto w-full max-w-200 px-8 max-[720px]:px-6">
+        <a href={`/${lang}/bits`} class="t-smcaps mb-8 inline-block text-gold-deep no-underline hover:text-crimson">
+          ← {t(lang, 'bits.back')}
+        </a>
+
+        <article class="bit-card">
+          <span class="mb-2 block font-smcaps text-[.82rem] tracking-[.18em] text-ink-on-parchment-soft"
+            >{bit.data.dateFormatted}</span
+          >
+          <h1 class="mb-6 font-blackletter text-[clamp(2rem,4vw,2.8rem)] font-normal tracking-normal text-ink-2">
+            {bit.data.title}
+          </h1>
+          <div class="[&_p]:text-ink-on-parchment [&_p]:leading-relaxed">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer copy={t(lang, 'foot.copy')} client:load />
+</Layout>

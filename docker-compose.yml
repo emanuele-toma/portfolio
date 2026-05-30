@@ -1,0 +1,9 @@
+name: portfolio
+services:
+  portfolio:
+    init: true
+    build: .
+    ports:
+      - 4321:4321
+    environment:
+      - CONTACT_FORM_ACCESS_KEY=${CONTACT_FORM_ACCESS_KEY}
