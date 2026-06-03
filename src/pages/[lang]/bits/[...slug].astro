@@ -34,9 +34,29 @@ const langLinks = [
   { lang: 'en' as Lang, href: `/en/bits/${slug}` },
   { lang: 'it' as Lang, href: `/it/bits/${slug}` },
 ];
+
+const origin = (Astro.site ?? new URL('https://toma.gg')).origin;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: bit.data.title,
+  description: bit.data.summary,
+  datePublished: bit.data.date.toISOString(),
+  inLanguage: lang,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${origin}/${lang}/bits/${slug}` },
+  author: { '@type': 'Person', name: 'Emanuele Toma', url: `${origin}/${lang}/` },
+  image: bit.data.thumbnail ? `${origin}${bit.data.thumbnail}` : `${origin}/og.png`,
+};
 ---
 
-<Layout title={`${bit.data.title} - Emanuele Toma`} lang={lang}>
+<Layout
+  title={`${bit.data.title} - Emanuele Toma`}
+  lang={lang}
+  description={bit.data.summary}
+  path={`/bits/${slug}`}
+  type="article"
+  jsonLd={jsonLd}
+>
   <Nav current="bits" lang={lang} links={links} langLinks={langLinks} client:load />
 
   <main class="parchment flex-1 pb-24">

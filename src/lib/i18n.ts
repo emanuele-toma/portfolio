@@ -10,6 +10,12 @@ export const I18N: Record<Lang, I18nDict> = {
     'meta.title.bits': 'Bits - Emanuele Toma',
     'meta.title.contact': 'Hail - Emanuele Toma',
 
+    'meta.desc.home':
+      'Emanuele Toma - Full Stack Developer building with Python, React, TypeScript, AWS and Docker. Portfolio, notes and contact.',
+    'meta.desc.bits': 'Bits by Emanuele Toma: short notes, ideas, discoveries and small demos on web development and tech.',
+    'meta.desc.contact':
+      'Get in touch with Emanuele Toma - Full Stack Developer. Reach out about projects, opportunities, or just tech.',
+
     'nav.home': 'Home',
     'nav.bits': 'Bits',
     'nav.contact': 'Hail',
@@ -42,7 +48,6 @@ export const I18N: Record<Lang, I18nDict> = {
     'contact.form.msg': 'Message',
     'contact.form.send': 'Send a carrier pigeon',
     'contact.aside.title': 'Other ways to reach me',
-    'contact.aside.by': 'By the hand of Emanuele Toma.',
     'contact.aside.email': 'Email',
     'contact.aside.gh': 'GitHub',
     'contact.aside.li': 'LinkedIn',
@@ -55,6 +60,12 @@ export const I18N: Record<Lang, I18nDict> = {
     'meta.title.home': 'Emanuele Toma - Sviluppatore Full Stack',
     'meta.title.bits': 'Bits - Emanuele Toma',
     'meta.title.contact': 'Contatti - Emanuele Toma',
+
+    'meta.desc.home':
+      'Emanuele Toma - Sviluppatore Full Stack con Python, React, TypeScript, AWS e Docker. Portfolio, note e contatti.',
+    'meta.desc.bits': 'Bits di Emanuele Toma: note brevi, idee, scoperte e piccoli demo su sviluppo web e tecnologia.',
+    'meta.desc.contact':
+      'Contatta Emanuele Toma - Sviluppatore Full Stack. Scrivimi per progetti, opportunità o anche solo per parlare di tech.',
 
     'nav.home': 'Home',
     'nav.bits': 'Bits',
@@ -88,7 +99,6 @@ export const I18N: Record<Lang, I18nDict> = {
     'contact.form.msg': 'Messaggio',
     'contact.form.send': 'Invia un piccione viaggiatore',
     'contact.aside.title': 'Altri modi per raggiungermi',
-    'contact.aside.by': 'Per mano di Emanuele Toma.',
     'contact.aside.email': 'Email',
     'contact.aside.gh': 'GitHub',
     'contact.aside.li': 'LinkedIn',

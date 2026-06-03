@@ -30,7 +30,7 @@ const langLinks = [
 ];
 ---
 
-<Layout title={t(lang, 'meta.title.bits')} lang={lang}>
+<Layout title={t(lang, 'meta.title.bits')} lang={lang} description={t(lang, 'meta.desc.bits')} path="/bits">
   <Nav current="bits" lang={lang} links={links} langLinks={langLinks} client:load />
 
   <main class="parchment flex-1 pb-24">

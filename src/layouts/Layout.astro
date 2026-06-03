@@ -5,9 +5,31 @@ import type { Lang } from '../types/index';
 interface Props {
   title: string;
   lang: Lang;
+  description: string;
+  path: string;
+  image?: string;
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
 
-const { title, lang } = Astro.props;
+const { title, lang, description, path, image = '/og.png', type = 'website', jsonLd, noindex = false } = Astro.props;
+
+const origin = (Astro.site ?? new URL('https://toma.gg')).origin;
+const localized = (l: Lang) => (path === '/' ? `${origin}/${l}/` : `${origin}/${l}${path}`);
+
+const canonical = localized(lang);
+const alternates = [
+  { hreflang: 'en', href: localized('en') },
+  { hreflang: 'it', href: localized('it') },
+  { hreflang: 'x-default', href: `${origin}/` },
+];
+
+const ogImage = new URL(image, origin).href;
+const ogLocale = lang === 'it' ? 'it_IT' : 'en_US';
+const ogLocaleAlt = lang === 'it' ? 'en_US' : 'it_IT';
+
+const structuredData = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 <!doctype html>
 <html lang={lang}>
@@ -15,10 +37,44 @@ const { title, lang } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Emanuele Toma" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="theme-color" content="#2a2520" />
+
+    <link rel="canonical" href={canonical} />
+    {alternates.map(alt => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Emanuele Toma" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Emanuele Toma — Full Stack Developer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Grenze:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Pirata+One&display=swap" rel="stylesheet" />
+
+    {
+      structuredData.map(data => (
+        <script type="application/ld+json" set:html={JSON.stringify(data)} />
+      ))
+    }
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />

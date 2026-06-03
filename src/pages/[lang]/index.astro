@@ -21,9 +21,37 @@ const langLinks = [
   { lang: 'en' as Lang, href: '/en/' },
   { lang: 'it' as Lang, href: '/it/' },
 ];
+
+const origin = (Astro.site ?? new URL('https://toma.gg')).origin;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Emanuele Toma',
+    url: `${origin}/${lang}/`,
+    jobTitle: lang === 'it' ? 'Sviluppatore Full Stack' : 'Full Stack Developer',
+    email: 'mailto:emanuele@toma.gg',
+    image: `${origin}/og.png`,
+    sameAs: ['https://github.com/emanuele-toma', 'https://linkedin.com/in/emanuele-toma'],
+    knowsAbout: ['Python', 'React', 'TypeScript', 'AWS', 'Docker', 'Node.js'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Emanuele Toma',
+    url: `${origin}/`,
+    inLanguage: lang,
+  },
+];
 ---
 
-<Layout title={t(lang, 'meta.title.home')} lang={lang}>
+<Layout
+  title={t(lang, 'meta.title.home')}
+  lang={lang}
+  description={t(lang, 'meta.desc.home')}
+  path="/"
+  jsonLd={jsonLd}
+>
   <Nav current="home" lang={lang} links={links} langLinks={langLinks} client:load />
 
   <main class="parchment flex flex-1 items-center py-10 max-[720px]:py-8">
