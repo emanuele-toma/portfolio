@@ -15,12 +15,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  redirects: {
-    '/': { destination: '/en/', status: 301 },
-    '/bits': { destination: '/en/bits', status: 301 },
-    '/contact': { destination: '/en/contact', status: 301 },
-  },
-
   env: {
     schema: {
       CONTACT_FORM_ACCESS_KEY: envField.string({ context: 'server', access: 'public', optional: true }),
